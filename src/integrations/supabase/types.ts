@@ -14,7 +14,293 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      cvs: {
+        Row: {
+          ats_version: string
+          created_at: string | null
+          cv_type: string
+          id: string
+          job_offer_id: string | null
+          profile_id: string
+          recruiter_version: string
+          template: string | null
+          user_id: string
+        }
+        Insert: {
+          ats_version: string
+          created_at?: string | null
+          cv_type: string
+          id?: string
+          job_offer_id?: string | null
+          profile_id: string
+          recruiter_version: string
+          template?: string | null
+          user_id: string
+        }
+        Update: {
+          ats_version?: string
+          created_at?: string | null
+          cv_type?: string
+          id?: string
+          job_offer_id?: string | null
+          profile_id?: string
+          recruiter_version?: string
+          template?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "cvs_job_offer_id_fkey"
+            columns: ["job_offer_id"]
+            isOneToOne: false
+            referencedRelation: "job_offers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "cvs_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      job_offers: {
+        Row: {
+          analysis: Json | null
+          company: string | null
+          created_at: string | null
+          description: string
+          id: string
+          title: string | null
+          url: string | null
+          user_id: string
+        }
+        Insert: {
+          analysis?: Json | null
+          company?: string | null
+          created_at?: string | null
+          description: string
+          id?: string
+          title?: string | null
+          url?: string | null
+          user_id: string
+        }
+        Update: {
+          analysis?: Json | null
+          company?: string | null
+          created_at?: string | null
+          description?: string
+          id?: string
+          title?: string | null
+          url?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profile_certifications: {
+        Row: {
+          created_at: string | null
+          date_obtained: string | null
+          expiry_date: string | null
+          id: string
+          issuer: string | null
+          name: string
+          profile_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          date_obtained?: string | null
+          expiry_date?: string | null
+          id?: string
+          issuer?: string | null
+          name: string
+          profile_id: string
+        }
+        Update: {
+          created_at?: string | null
+          date_obtained?: string | null
+          expiry_date?: string | null
+          id?: string
+          issuer?: string | null
+          name?: string
+          profile_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "profile_certifications_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profile_education: {
+        Row: {
+          created_at: string | null
+          degree: string
+          description: string | null
+          end_date: string | null
+          id: string
+          institution: string
+          profile_id: string
+          start_date: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          degree: string
+          description?: string | null
+          end_date?: string | null
+          id?: string
+          institution: string
+          profile_id: string
+          start_date?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          degree?: string
+          description?: string | null
+          end_date?: string | null
+          id?: string
+          institution?: string
+          profile_id?: string
+          start_date?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "profile_education_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profile_experiences: {
+        Row: {
+          achievements: string[] | null
+          company: string
+          created_at: string | null
+          end_date: string | null
+          id: string
+          is_current: boolean | null
+          position: string
+          profile_id: string
+          start_date: string | null
+        }
+        Insert: {
+          achievements?: string[] | null
+          company: string
+          created_at?: string | null
+          end_date?: string | null
+          id?: string
+          is_current?: boolean | null
+          position: string
+          profile_id: string
+          start_date?: string | null
+        }
+        Update: {
+          achievements?: string[] | null
+          company?: string
+          created_at?: string | null
+          end_date?: string | null
+          id?: string
+          is_current?: boolean | null
+          position?: string
+          profile_id?: string
+          start_date?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "profile_experiences_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profile_languages: {
+        Row: {
+          created_at: string | null
+          id: string
+          language: string
+          proficiency: string
+          profile_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          language: string
+          proficiency: string
+          profile_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          language?: string
+          proficiency?: string
+          profile_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "profile_languages_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          city: string | null
+          country: string | null
+          created_at: string | null
+          email: string | null
+          first_name: string | null
+          id: string
+          last_name: string | null
+          phone: string | null
+          professional_title: string | null
+          skills: string[] | null
+          summary: string | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          city?: string | null
+          country?: string | null
+          created_at?: string | null
+          email?: string | null
+          first_name?: string | null
+          id?: string
+          last_name?: string | null
+          phone?: string | null
+          professional_title?: string | null
+          skills?: string[] | null
+          summary?: string | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          city?: string | null
+          country?: string | null
+          created_at?: string | null
+          email?: string | null
+          first_name?: string | null
+          id?: string
+          last_name?: string | null
+          phone?: string | null
+          professional_title?: string | null
+          skills?: string[] | null
+          summary?: string | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
